@@ -12,6 +12,10 @@
 
 @interface ViewController : UIViewController
 
-
+@property (strong, nonatomic)  FMDatabase *db;
+@property (weak, nonatomic) IBOutlet UIButton *btn;
+- (IBAction)btnAction:(id)sender;
+- (IBAction)xmlRead:(id)sender;
+-(void)saveBooks;
 @end
 

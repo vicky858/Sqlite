@@ -166,7 +166,7 @@ int ctCount = 0;
     }
     
     ctCount = ctCount + 1;
-    [childDict setValue:[NSString stringWithFormat:@"%d",ctCount] forKey:@"@controlID"]; // Hardcode @controlID for ordered the control position.
+//    [childDict setValue:[NSString stringWithFormat:@"%d",ctCount] forKey:@"@BookID"]; // Hardcode @controlID for ordered the control position.
     
     // If there's already an item for this key, it means we need to create an array
     id existingValue = [parentDict objectForKey:elementName];

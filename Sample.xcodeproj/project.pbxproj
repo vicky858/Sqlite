@@ -7,22 +7,28 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2F1E9B6C1D5CAEF500857B79 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F1E9B6B1D5CAEF500857B79 /* ViewController.m */; };
+		2F0976751D62F8CC0069E8F5 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F1E9B841D5CAF4600857B79 /* libsqlite3.tbd */; };
 		2F1E9B7D1D5CAF2F00857B79 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F1E9B711D5CAF2F00857B79 /* FMDatabase.m */; };
 		2F1E9B7E1D5CAF2F00857B79 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F1E9B731D5CAF2F00857B79 /* FMDatabaseAdditions.m */; };
 		2F1E9B7F1D5CAF2F00857B79 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F1E9B751D5CAF2F00857B79 /* FMDatabasePool.m */; };
 		2F1E9B801D5CAF2F00857B79 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F1E9B771D5CAF2F00857B79 /* FMDatabaseQueue.m */; };
 		2F1E9B821D5CAF2F00857B79 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F1E9B7A1D5CAF2F00857B79 /* FMResultSet.m */; };
 		2F1E9B831D5CAF2F00857B79 /* SQLiteManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F1E9B7C1D5CAF2F00857B79 /* SQLiteManager.m */; };
-		2F1E9B851D5CAF4700857B79 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F1E9B841D5CAF4600857B79 /* libsqlite3.tbd */; };
 		2F1E9B8E1D5CB53200857B79 /* XMLReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F1E9B8B1D5CB53200857B79 /* XMLReader.m */; };
 		2F1E9B8F1D5CB53200857B79 /* XMLWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F1E9B8D1D5CB53200857B79 /* XMLWriter.m */; };
-		2F5506F61D5DC7BC003C24A2 /* Books.xml in Resources */ = {isa = PBXBuildFile; fileRef = 2F5506F51D5DC7BC003C24A2 /* Books.xml */; };
-		2F5506FC1D5DD9FA003C24A2 /* page1.xml in Resources */ = {isa = PBXBuildFile; fileRef = 2F5506FB1D5DD9FA003C24A2 /* page1.xml */; };
-		2F5506FE1D5DE5AF003C24A2 /* Books.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 2F5506FD1D5DE5AF003C24A2 /* Books.sqlite */; };
+		2F20DE1E1D6B122C00D4C88F /* Books.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 2F20DE1C1D6B122C00D4C88F /* Books.sqlite */; };
+		2F20DE1F1D6B122C00D4C88F /* Books.xml in Resources */ = {isa = PBXBuildFile; fileRef = 2F20DE1D1D6B122C00D4C88F /* Books.xml */; };
+		2F20DE241D6B124500D4C88F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F20DE211D6B124500D4C88F /* ViewController.m */; };
+		2F20DE251D6B124500D4C88F /* Book.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F20DE231D6B124500D4C88F /* Book.m */; };
+		2F20DE271D6B1A9200D4C88F /* Read.xml in Resources */ = {isa = PBXBuildFile; fileRef = 2F20DE261D6B1A9200D4C88F /* Read.xml */; };
+		2F2A9F501D6AC28300D6BCAD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F2A9F4F1D6AC28300D6BCAD /* Main.storyboard */; };
+		2F3E8D981D6C358C00937489 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F3E8D971D6C358C00937489 /* MapKit.framework */; };
+		2F3E8D9C1D6C35DD00937489 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F3E8D9B1D6C35DD00937489 /* MapViewController.m */; };
+		2F3E8DA01D6C397000937489 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F3E8D9F1D6C397000937489 /* CoreLocation.framework */; };
+		2F3E8DA21D6C459200937489 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F3E8DA11D6C459200937489 /* MobileCoreServices.framework */; };
+		2F3E8DA41D6C57C200937489 /* user.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2F3E8DA31D6C57C200937489 /* user.jpg */; };
 		2FCA47C11D5C47FB00ED7A36 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FCA47C01D5C47FB00ED7A36 /* main.m */; };
 		2FCA47C41D5C47FB00ED7A36 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FCA47C31D5C47FB00ED7A36 /* AppDelegate.m */; };
-		2FCA47CA1D5C47FB00ED7A36 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FCA47C81D5C47FB00ED7A36 /* Main.storyboard */; };
 		2FCA47CC1D5C47FB00ED7A36 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2FCA47CB1D5C47FB00ED7A36 /* Assets.xcassets */; };
 		2FCA47CF1D5C47FB00ED7A36 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FCA47CD1D5C47FB00ED7A36 /* LaunchScreen.storyboard */; };
 		2FCA47DA1D5C47FB00ED7A36 /* SampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FCA47D91D5C47FB00ED7A36 /* SampleTests.m */; };
@@ -39,8 +45,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2F1E9B6A1D5CAEF500857B79 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		2F1E9B6B1D5CAEF500857B79 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		2F1E9B701D5CAF2F00857B79 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
 		2F1E9B711D5CAF2F00857B79 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
 		2F1E9B721D5CAF2F00857B79 /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
@@ -59,14 +63,24 @@
 		2F1E9B8B1D5CB53200857B79 /* XMLReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLReader.m; sourceTree = "<group>"; };
 		2F1E9B8C1D5CB53200857B79 /* XMLWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLWriter.h; sourceTree = "<group>"; };
 		2F1E9B8D1D5CB53200857B79 /* XMLWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLWriter.m; sourceTree = "<group>"; };
-		2F5506F51D5DC7BC003C24A2 /* Books.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Books.xml; sourceTree = "<group>"; };
-		2F5506FB1D5DD9FA003C24A2 /* page1.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = page1.xml; sourceTree = "<group>"; };
-		2F5506FD1D5DE5AF003C24A2 /* Books.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = Books.sqlite; sourceTree = "<group>"; };
+		2F20DE1C1D6B122C00D4C88F /* Books.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = Books.sqlite; sourceTree = "<group>"; };
+		2F20DE1D1D6B122C00D4C88F /* Books.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Books.xml; sourceTree = "<group>"; };
+		2F20DE201D6B124500D4C88F /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		2F20DE211D6B124500D4C88F /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		2F20DE221D6B124500D4C88F /* Book.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Book.h; sourceTree = "<group>"; };
+		2F20DE231D6B124500D4C88F /* Book.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Book.m; sourceTree = "<group>"; };
+		2F20DE261D6B1A9200D4C88F /* Read.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Read.xml; sourceTree = "<group>"; };
+		2F2A9F4F1D6AC28300D6BCAD /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		2F3E8D971D6C358C00937489 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		2F3E8D9A1D6C35DD00937489 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
+		2F3E8D9B1D6C35DD00937489 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
+		2F3E8D9F1D6C397000937489 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		2F3E8DA11D6C459200937489 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		2F3E8DA31D6C57C200937489 /* user.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = user.jpg; sourceTree = "<group>"; };
 		2FCA47BC1D5C47FB00ED7A36 /* Sample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FCA47C01D5C47FB00ED7A36 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2FCA47C21D5C47FB00ED7A36 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		2FCA47C31D5C47FB00ED7A36 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		2FCA47C91D5C47FB00ED7A36 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2FCA47CB1D5C47FB00ED7A36 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2FCA47CE1D5C47FB00ED7A36 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2FCA47D01D5C47FB00ED7A36 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -80,7 +94,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2F1E9B851D5CAF4700857B79 /* libsqlite3.tbd in Frameworks */,
+				2F3E8DA21D6C459200937489 /* MobileCoreServices.framework in Frameworks */,
+				2F3E8DA01D6C397000937489 /* CoreLocation.framework in Frameworks */,
+				2F3E8D981D6C358C00937489 /* MapKit.framework in Frameworks */,
+				2F0976751D62F8CC0069E8F5 /* libsqlite3.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,18 +142,29 @@
 			name = "Xml Lib";
 			sourceTree = "<group>";
 		};
+		2F3E8D991D6C35A700937489 /* MapKit */ = {
+			isa = PBXGroup;
+			children = (
+				2F3E8DA11D6C459200937489 /* MobileCoreServices.framework */,
+				2F3E8D9F1D6C397000937489 /* CoreLocation.framework */,
+				2F3E8D971D6C358C00937489 /* MapKit.framework */,
+			);
+			name = MapKit;
+			sourceTree = "<group>";
+		};
 		2FCA47B31D5C47FB00ED7A36 = {
 			isa = PBXGroup;
 			children = (
-				2F5506FB1D5DD9FA003C24A2 /* page1.xml */,
 				2F1E9B841D5CAF4600857B79 /* libsqlite3.tbd */,
-				2F5506FD1D5DE5AF003C24A2 /* Books.sqlite */,
-				2F5506F51D5DC7BC003C24A2 /* Books.xml */,
+				2F20DE1C1D6B122C00D4C88F /* Books.sqlite */,
+				2F20DE1D1D6B122C00D4C88F /* Books.xml */,
+				2F20DE261D6B1A9200D4C88F /* Read.xml */,
 				2F1E9B901D5CB53800857B79 /* Xml Lib */,
 				2F1E9B6F1D5CAF2F00857B79 /* CoreLib */,
 				2FCA47BE1D5C47FB00ED7A36 /* Sample */,
 				2FCA47D81D5C47FB00ED7A36 /* SampleTests */,
 				2FCA47BD1D5C47FB00ED7A36 /* Products */,
+				2F3E8D991D6C35A700937489 /* MapKit */,
 			);
 			sourceTree = "<group>";
 		};
@@ -154,12 +182,17 @@
 			children = (
 				2FCA47C21D5C47FB00ED7A36 /* AppDelegate.h */,
 				2FCA47C31D5C47FB00ED7A36 /* AppDelegate.m */,
-				2F1E9B6A1D5CAEF500857B79 /* ViewController.h */,
-				2F1E9B6B1D5CAEF500857B79 /* ViewController.m */,
-				2FCA47C81D5C47FB00ED7A36 /* Main.storyboard */,
+				2F20DE201D6B124500D4C88F /* ViewController.h */,
+				2F20DE211D6B124500D4C88F /* ViewController.m */,
+				2F20DE221D6B124500D4C88F /* Book.h */,
+				2F20DE231D6B124500D4C88F /* Book.m */,
+				2F3E8D9A1D6C35DD00937489 /* MapViewController.h */,
+				2F3E8D9B1D6C35DD00937489 /* MapViewController.m */,
+				2F2A9F4F1D6AC28300D6BCAD /* Main.storyboard */,
 				2FCA47CB1D5C47FB00ED7A36 /* Assets.xcassets */,
 				2FCA47CD1D5C47FB00ED7A36 /* LaunchScreen.storyboard */,
 				2FCA47D01D5C47FB00ED7A36 /* Info.plist */,
+				2F3E8DA31D6C57C200937489 /* user.jpg */,
 				2FCA47BF1D5C47FB00ED7A36 /* Supporting Files */,
 			);
 			path = Sample;
@@ -262,12 +295,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2F5506FE1D5DE5AF003C24A2 /* Books.sqlite in Resources */,
-				2F5506F61D5DC7BC003C24A2 /* Books.xml in Resources */,
+				2F20DE1F1D6B122C00D4C88F /* Books.xml in Resources */,
+				2F2A9F501D6AC28300D6BCAD /* Main.storyboard in Resources */,
+				2F3E8DA41D6C57C200937489 /* user.jpg in Resources */,
 				2FCA47CF1D5C47FB00ED7A36 /* LaunchScreen.storyboard in Resources */,
-				2F5506FC1D5DD9FA003C24A2 /* page1.xml in Resources */,
+				2F20DE1E1D6B122C00D4C88F /* Books.sqlite in Resources */,
+				2F20DE271D6B1A9200D4C88F /* Read.xml in Resources */,
 				2FCA47CC1D5C47FB00ED7A36 /* Assets.xcassets in Resources */,
-				2FCA47CA1D5C47FB00ED7A36 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -285,12 +319,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2F1E9B6C1D5CAEF500857B79 /* ViewController.m in Sources */,
 				2F1E9B7F1D5CAF2F00857B79 /* FMDatabasePool.m in Sources */,
 				2F1E9B8E1D5CB53200857B79 /* XMLReader.m in Sources */,
 				2F1E9B8F1D5CB53200857B79 /* XMLWriter.m in Sources */,
 				2FCA47C41D5C47FB00ED7A36 /* AppDelegate.m in Sources */,
+				2F20DE251D6B124500D4C88F /* Book.m in Sources */,
 				2F1E9B801D5CAF2F00857B79 /* FMDatabaseQueue.m in Sources */,
+				2F20DE241D6B124500D4C88F /* ViewController.m in Sources */,
+				2F3E8D9C1D6C35DD00937489 /* MapViewController.m in Sources */,
 				2F1E9B831D5CAF2F00857B79 /* SQLiteManager.m in Sources */,
 				2FCA47C11D5C47FB00ED7A36 /* main.m in Sources */,
 				2F1E9B821D5CAF2F00857B79 /* FMResultSet.m in Sources */,
@@ -318,14 +354,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		2FCA47C81D5C47FB00ED7A36 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2FCA47C91D5C47FB00ED7A36 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		2FCA47CD1D5C47FB00ED7A36 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
