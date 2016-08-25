@@ -11,6 +11,15 @@
 #import "FMDatabase.h"
 #import "XMLReader.h"
 #import "Book.h"
+#import "AFURLSessionManager.h"
+#import "AFHTTPSessionManager.h"
+#import "AFNetworking.h"
+#import "AFURLRequestSerialization.h"
+
+#import "AFURLConnectionOperation.h"
+#import "AFHTTPRequestOperation.h"
+#import "AFURLRequestSerialization.h"
+
 
 
 @interface ViewController () <NSXMLParserDelegate>
@@ -32,6 +41,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.results = [[NSMutableArray alloc] init];
     // Do any additional setup after loading the view, typically from a nib.
     
 }
@@ -85,14 +95,82 @@ NSLog(@"xml Dictionary :%@",xmlDictionary);
 
 -(void)parseXml
 {
+   
+  //  NSURL *URL = [[NSURL alloc] initWithString:@"https://192.168.5.172/iosDemo/Books.xml"];
+//    NSString *xmlString = [[NSString alloc] initWithContentsOfURL:URL encoding:NSUTF8StringEncoding error:NULL];
+//    NSLog(@"string: %@", xmlString);
     
-    NSURL *url=[[NSBundle mainBundle]URLForResource:@"Books" withExtension:@"xml"];
-    NSXMLParser *xmlparse=[[NSXMLParser alloc]initWithContentsOfURL:url];
-    NSLog(@"the parser file is: %@",xmlparse);
-    [xmlparse setDelegate:self];
-    [xmlparse setShouldResolveExternalEntities:NO];
-    [xmlparse parse];
-}
+
+//    NSString *url = [[NSBundle mainBundle]pathForResource:@"Books" ofType:@"xml"];
+//    NSXMLParser *xmlparse=[[NSXMLParser alloc]initWithContentsOfURL:url];
+//    NSLog(@"the parser file is: %@",xmlparse);
+//    [xmlparse setDelegate:self];
+//    [xmlparse setShouldResolveExternalEntities:NO];
+//    [xmlparse parse];
+    
+ // frst try
+    /*
+    NSString *string = [NSString stringWithFormat:@"https://192.168.5.172/iosDemo/Books.xml"];
+    NSURL *url = [NSURL URLWithString:string];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    operation.responseSerializer = [AFXMLParserResponseSerializer serializer];
+    
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject)
+    {
+        
+        NSXMLParser *XMLParser = (NSXMLParser *)responseObject;
+        [XMLParser setShouldProcessNamespaces:YES];
+    
+    
+    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error Retrieving Weather"
+                                                            message:[error localizedDescription]
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"Ok"
+                                                  otherButtonTitles:nil];
+        [alertView show];
+        
+    }];
+    
+    [operation start];
+    NSLog(@"the parser file is: %@",request);
+    
+*/
+    NSString *string = [NSString stringWithFormat:@"https://192.168.5.172/iosDemo/Books.xml"];
+    NSURL *url = [NSURL URLWithString:string];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    
+    // 2
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    operation.responseSerializer = [AFJSONResponseSerializer serializer];
+    
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        // 3
+        self.weather = (NSDictionary *)responseObject;
+        self.title = @"JSON Retrieved";
+        [self.tableView reloadData];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        // 4
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error Retrieving Weather"
+                                                            message:[error localizedDescription]
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"Ok"
+                                                  otherButtonTitles:nil];
+        [alertView show];
+    }];
+    
+    // 5
+    [operation start];
+
+    NSLog(@"the parser file is: %@",request);
+    
+    }
 
 
 - (void)parserDidStartDocument:(NSXMLParser *)parser{

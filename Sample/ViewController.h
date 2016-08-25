@@ -10,10 +10,13 @@
 #import "SQLiteManager.h"
 #import "FMDatabase.h"
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController<NSXMLParserDelegate>
 
 @property (strong, nonatomic)  FMDatabase *db;
 @property (weak, nonatomic) IBOutlet UIButton *btn;
+@property(nonatomic, strong) NSMutableArray *results;
+@property(strong) NSDictionary *weather;
+@property (nonatomic, strong, null_resettable) UITableView *tableView;
 - (IBAction)btnAction:(id)sender;
 - (IBAction)xmlRead:(id)sender;
 -(void)saveBooks;

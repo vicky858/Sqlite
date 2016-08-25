@@ -2,21 +2,19 @@
 //  MapViewController.h
 //  Sample
 //
-//  Created by vignesh on 8/23/16.
+//  Created by vignesh on 8/24/16.
 //  Copyright © 2016 vignesh. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 #import <MapKit/MapKit.h>
-#import <CoreLocation/CoreLocation.h>
 
+@interface MapViewController : NSObject<MKAnnotation>
 
+@property (nonatomic, strong) NSString *title;
+@property (nonatomic, readwrite) CLLocationCoordinate2D coordinate;
 
-@interface MapViewController : UIViewController<MKMapViewDelegate,CLLocationManagerDelegate>
-@property (strong, nonatomic) IBOutlet MKMapView *mapView;
-
-@property (nonatomic, strong) CLLocationManager *locationManager;
-@property (nonatomic, strong) CLLocation* currentLocation;
-
+- (id)initWithTitle:(NSString *)title andCoordinate:
+(CLLocationCoordinate2D)coordinate2d;
 
 @end

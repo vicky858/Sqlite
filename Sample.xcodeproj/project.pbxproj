@@ -23,15 +23,28 @@
 		2F20DE271D6B1A9200D4C88F /* Read.xml in Resources */ = {isa = PBXBuildFile; fileRef = 2F20DE261D6B1A9200D4C88F /* Read.xml */; };
 		2F2A9F501D6AC28300D6BCAD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F2A9F4F1D6AC28300D6BCAD /* Main.storyboard */; };
 		2F3E8D981D6C358C00937489 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F3E8D971D6C358C00937489 /* MapKit.framework */; };
-		2F3E8D9C1D6C35DD00937489 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F3E8D9B1D6C35DD00937489 /* MapViewController.m */; };
 		2F3E8DA01D6C397000937489 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F3E8D9F1D6C397000937489 /* CoreLocation.framework */; };
 		2F3E8DA21D6C459200937489 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F3E8DA11D6C459200937489 /* MobileCoreServices.framework */; };
 		2F3E8DA41D6C57C200937489 /* user.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2F3E8DA31D6C57C200937489 /* user.jpg */; };
+		2FC864811D6DACD400F37DB3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FC864801D6DACD400F37DB3 /* Foundation.framework */; };
+		2FC864831D6DACDD00F37DB3 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FC864821D6DACDD00F37DB3 /* CoreFoundation.framework */; };
+		2FC864981D6DB13800F37DB3 /* MailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC864971D6DB13800F37DB3 /* MailViewController.m */; };
+		2FC8649B1D6DB66A00F37DB3 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC8649A1D6DB66A00F37DB3 /* MapViewController.m */; };
+		2FC8649E1D6DB67C00F37DB3 /* MapController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC8649D1D6DB67C00F37DB3 /* MapController.m */; };
 		2FCA47C11D5C47FB00ED7A36 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FCA47C01D5C47FB00ED7A36 /* main.m */; };
 		2FCA47C41D5C47FB00ED7A36 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FCA47C31D5C47FB00ED7A36 /* AppDelegate.m */; };
 		2FCA47CC1D5C47FB00ED7A36 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2FCA47CB1D5C47FB00ED7A36 /* Assets.xcassets */; };
 		2FCA47CF1D5C47FB00ED7A36 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FCA47CD1D5C47FB00ED7A36 /* LaunchScreen.storyboard */; };
 		2FCA47DA1D5C47FB00ED7A36 /* SampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FCA47D91D5C47FB00ED7A36 /* SampleTests.m */; };
+		2FDCEDEE1D6F25350078C7E7 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FDCEDDB1D6F25350078C7E7 /* AFHTTPRequestOperation.m */; };
+		2FDCEDEF1D6F25350078C7E7 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FDCEDDD1D6F25350078C7E7 /* AFHTTPRequestOperationManager.m */; };
+		2FDCEDF01D6F25350078C7E7 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FDCEDDF1D6F25350078C7E7 /* AFHTTPSessionManager.m */; };
+		2FDCEDF11D6F25350078C7E7 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FDCEDE21D6F25350078C7E7 /* AFNetworkReachabilityManager.m */; };
+		2FDCEDF21D6F25350078C7E7 /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FDCEDE41D6F25350078C7E7 /* AFSecurityPolicy.m */; };
+		2FDCEDF31D6F25350078C7E7 /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FDCEDE61D6F25350078C7E7 /* AFURLConnectionOperation.m */; };
+		2FDCEDF41D6F25350078C7E7 /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FDCEDE81D6F25350078C7E7 /* AFURLRequestSerialization.m */; };
+		2FDCEDF51D6F25350078C7E7 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FDCEDEA1D6F25350078C7E7 /* AFURLResponseSerialization.m */; };
+		2FDCEDF61D6F25350078C7E7 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FDCEDEC1D6F25350078C7E7 /* AFURLSessionManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,11 +85,17 @@
 		2F20DE261D6B1A9200D4C88F /* Read.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Read.xml; sourceTree = "<group>"; };
 		2F2A9F4F1D6AC28300D6BCAD /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		2F3E8D971D6C358C00937489 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		2F3E8D9A1D6C35DD00937489 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
-		2F3E8D9B1D6C35DD00937489 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 		2F3E8D9F1D6C397000937489 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		2F3E8DA11D6C459200937489 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		2F3E8DA31D6C57C200937489 /* user.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = user.jpg; sourceTree = "<group>"; };
+		2FC864801D6DACD400F37DB3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		2FC864821D6DACDD00F37DB3 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		2FC864961D6DB13800F37DB3 /* MailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailViewController.h; sourceTree = "<group>"; };
+		2FC864971D6DB13800F37DB3 /* MailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MailViewController.m; sourceTree = "<group>"; };
+		2FC864991D6DB66A00F37DB3 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
+		2FC8649A1D6DB66A00F37DB3 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
+		2FC8649C1D6DB67C00F37DB3 /* MapController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapController.h; sourceTree = "<group>"; };
+		2FC8649D1D6DB67C00F37DB3 /* MapController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapController.m; sourceTree = "<group>"; };
 		2FCA47BC1D5C47FB00ED7A36 /* Sample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FCA47C01D5C47FB00ED7A36 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2FCA47C21D5C47FB00ED7A36 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -87,6 +106,25 @@
 		2FCA47D51D5C47FB00ED7A36 /* SampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FCA47D91D5C47FB00ED7A36 /* SampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SampleTests.m; sourceTree = "<group>"; };
 		2FCA47DB1D5C47FB00ED7A36 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2FDCEDDA1D6F25350078C7E7 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
+		2FDCEDDB1D6F25350078C7E7 /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
+		2FDCEDDC1D6F25350078C7E7 /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
+		2FDCEDDD1D6F25350078C7E7 /* AFHTTPRequestOperationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperationManager.m; sourceTree = "<group>"; };
+		2FDCEDDE1D6F25350078C7E7 /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
+		2FDCEDDF1D6F25350078C7E7 /* AFHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPSessionManager.m; sourceTree = "<group>"; };
+		2FDCEDE01D6F25350078C7E7 /* AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworking.h; sourceTree = "<group>"; };
+		2FDCEDE11D6F25350078C7E7 /* AFNetworkReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkReachabilityManager.h; sourceTree = "<group>"; };
+		2FDCEDE21D6F25350078C7E7 /* AFNetworkReachabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNetworkReachabilityManager.m; sourceTree = "<group>"; };
+		2FDCEDE31D6F25350078C7E7 /* AFSecurityPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSecurityPolicy.h; sourceTree = "<group>"; };
+		2FDCEDE41D6F25350078C7E7 /* AFSecurityPolicy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSecurityPolicy.m; sourceTree = "<group>"; };
+		2FDCEDE51D6F25350078C7E7 /* AFURLConnectionOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLConnectionOperation.h; sourceTree = "<group>"; };
+		2FDCEDE61D6F25350078C7E7 /* AFURLConnectionOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLConnectionOperation.m; sourceTree = "<group>"; };
+		2FDCEDE71D6F25350078C7E7 /* AFURLRequestSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLRequestSerialization.h; sourceTree = "<group>"; };
+		2FDCEDE81D6F25350078C7E7 /* AFURLRequestSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLRequestSerialization.m; sourceTree = "<group>"; };
+		2FDCEDE91D6F25350078C7E7 /* AFURLResponseSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLResponseSerialization.h; sourceTree = "<group>"; };
+		2FDCEDEA1D6F25350078C7E7 /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLResponseSerialization.m; sourceTree = "<group>"; };
+		2FDCEDEB1D6F25350078C7E7 /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
+		2FDCEDEC1D6F25350078C7E7 /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +132,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2FC864831D6DACDD00F37DB3 /* CoreFoundation.framework in Frameworks */,
+				2FC864811D6DACD400F37DB3 /* Foundation.framework in Frameworks */,
 				2F3E8DA21D6C459200937489 /* MobileCoreServices.framework in Frameworks */,
 				2F3E8DA01D6C397000937489 /* CoreLocation.framework in Frameworks */,
 				2F3E8D981D6C358C00937489 /* MapKit.framework in Frameworks */,
@@ -142,14 +182,16 @@
 			name = "Xml Lib";
 			sourceTree = "<group>";
 		};
-		2F3E8D991D6C35A700937489 /* MapKit */ = {
+		2FC864841D6DACE700F37DB3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				2F3E8DA11D6C459200937489 /* MobileCoreServices.framework */,
 				2F3E8D9F1D6C397000937489 /* CoreLocation.framework */,
 				2F3E8D971D6C358C00937489 /* MapKit.framework */,
+				2FC864821D6DACDD00F37DB3 /* CoreFoundation.framework */,
+				2FC864801D6DACD400F37DB3 /* Foundation.framework */,
 			);
-			name = MapKit;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		2FCA47B31D5C47FB00ED7A36 = {
@@ -159,12 +201,13 @@
 				2F20DE1C1D6B122C00D4C88F /* Books.sqlite */,
 				2F20DE1D1D6B122C00D4C88F /* Books.xml */,
 				2F20DE261D6B1A9200D4C88F /* Read.xml */,
+				2FDCEDED1D6F25350078C7E7 /* AFNetworkings */,
 				2F1E9B901D5CB53800857B79 /* Xml Lib */,
 				2F1E9B6F1D5CAF2F00857B79 /* CoreLib */,
 				2FCA47BE1D5C47FB00ED7A36 /* Sample */,
 				2FCA47D81D5C47FB00ED7A36 /* SampleTests */,
 				2FCA47BD1D5C47FB00ED7A36 /* Products */,
-				2F3E8D991D6C35A700937489 /* MapKit */,
+				2FC864841D6DACE700F37DB3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -186,8 +229,12 @@
 				2F20DE211D6B124500D4C88F /* ViewController.m */,
 				2F20DE221D6B124500D4C88F /* Book.h */,
 				2F20DE231D6B124500D4C88F /* Book.m */,
-				2F3E8D9A1D6C35DD00937489 /* MapViewController.h */,
-				2F3E8D9B1D6C35DD00937489 /* MapViewController.m */,
+				2FC8649C1D6DB67C00F37DB3 /* MapController.h */,
+				2FC8649D1D6DB67C00F37DB3 /* MapController.m */,
+				2FC864991D6DB66A00F37DB3 /* MapViewController.h */,
+				2FC8649A1D6DB66A00F37DB3 /* MapViewController.m */,
+				2FC864961D6DB13800F37DB3 /* MailViewController.h */,
+				2FC864971D6DB13800F37DB3 /* MailViewController.m */,
 				2F2A9F4F1D6AC28300D6BCAD /* Main.storyboard */,
 				2FCA47CB1D5C47FB00ED7A36 /* Assets.xcassets */,
 				2FCA47CD1D5C47FB00ED7A36 /* LaunchScreen.storyboard */,
@@ -213,6 +260,33 @@
 				2FCA47DB1D5C47FB00ED7A36 /* Info.plist */,
 			);
 			path = SampleTests;
+			sourceTree = "<group>";
+		};
+		2FDCEDED1D6F25350078C7E7 /* AFNetworkings */ = {
+			isa = PBXGroup;
+			children = (
+				2FDCEDDA1D6F25350078C7E7 /* AFHTTPRequestOperation.h */,
+				2FDCEDDB1D6F25350078C7E7 /* AFHTTPRequestOperation.m */,
+				2FDCEDDC1D6F25350078C7E7 /* AFHTTPRequestOperationManager.h */,
+				2FDCEDDD1D6F25350078C7E7 /* AFHTTPRequestOperationManager.m */,
+				2FDCEDDE1D6F25350078C7E7 /* AFHTTPSessionManager.h */,
+				2FDCEDDF1D6F25350078C7E7 /* AFHTTPSessionManager.m */,
+				2FDCEDE01D6F25350078C7E7 /* AFNetworking.h */,
+				2FDCEDE11D6F25350078C7E7 /* AFNetworkReachabilityManager.h */,
+				2FDCEDE21D6F25350078C7E7 /* AFNetworkReachabilityManager.m */,
+				2FDCEDE31D6F25350078C7E7 /* AFSecurityPolicy.h */,
+				2FDCEDE41D6F25350078C7E7 /* AFSecurityPolicy.m */,
+				2FDCEDE51D6F25350078C7E7 /* AFURLConnectionOperation.h */,
+				2FDCEDE61D6F25350078C7E7 /* AFURLConnectionOperation.m */,
+				2FDCEDE71D6F25350078C7E7 /* AFURLRequestSerialization.h */,
+				2FDCEDE81D6F25350078C7E7 /* AFURLRequestSerialization.m */,
+				2FDCEDE91D6F25350078C7E7 /* AFURLResponseSerialization.h */,
+				2FDCEDEA1D6F25350078C7E7 /* AFURLResponseSerialization.m */,
+				2FDCEDEB1D6F25350078C7E7 /* AFURLSessionManager.h */,
+				2FDCEDEC1D6F25350078C7E7 /* AFURLSessionManager.m */,
+			);
+			name = AFNetworkings;
+			path = ../../Downloads/Weather_Final/Weather/AFNetworking;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -319,19 +393,30 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2FDCEDEE1D6F25350078C7E7 /* AFHTTPRequestOperation.m in Sources */,
 				2F1E9B7F1D5CAF2F00857B79 /* FMDatabasePool.m in Sources */,
 				2F1E9B8E1D5CB53200857B79 /* XMLReader.m in Sources */,
 				2F1E9B8F1D5CB53200857B79 /* XMLWriter.m in Sources */,
+				2FDCEDF51D6F25350078C7E7 /* AFURLResponseSerialization.m in Sources */,
 				2FCA47C41D5C47FB00ED7A36 /* AppDelegate.m in Sources */,
 				2F20DE251D6B124500D4C88F /* Book.m in Sources */,
+				2FC864981D6DB13800F37DB3 /* MailViewController.m in Sources */,
+				2FDCEDF31D6F25350078C7E7 /* AFURLConnectionOperation.m in Sources */,
+				2FDCEDEF1D6F25350078C7E7 /* AFHTTPRequestOperationManager.m in Sources */,
 				2F1E9B801D5CAF2F00857B79 /* FMDatabaseQueue.m in Sources */,
+				2FC8649E1D6DB67C00F37DB3 /* MapController.m in Sources */,
 				2F20DE241D6B124500D4C88F /* ViewController.m in Sources */,
-				2F3E8D9C1D6C35DD00937489 /* MapViewController.m in Sources */,
 				2F1E9B831D5CAF2F00857B79 /* SQLiteManager.m in Sources */,
+				2FDCEDF61D6F25350078C7E7 /* AFURLSessionManager.m in Sources */,
+				2FDCEDF21D6F25350078C7E7 /* AFSecurityPolicy.m in Sources */,
+				2FDCEDF11D6F25350078C7E7 /* AFNetworkReachabilityManager.m in Sources */,
+				2FDCEDF01D6F25350078C7E7 /* AFHTTPSessionManager.m in Sources */,
+				2FDCEDF41D6F25350078C7E7 /* AFURLRequestSerialization.m in Sources */,
 				2FCA47C11D5C47FB00ED7A36 /* main.m in Sources */,
 				2F1E9B821D5CAF2F00857B79 /* FMResultSet.m in Sources */,
 				2F1E9B7D1D5CAF2F00857B79 /* FMDatabase.m in Sources */,
 				2F1E9B7E1D5CAF2F00857B79 /* FMDatabaseAdditions.m in Sources */,
+				2FC8649B1D6DB66A00F37DB3 /* MapViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
