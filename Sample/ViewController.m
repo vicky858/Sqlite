@@ -11,15 +11,10 @@
 #import "FMDatabase.h"
 #import "XMLReader.h"
 #import "Book.h"
-#import "AFURLSessionManager.h"
-#import "AFHTTPSessionManager.h"
 #import "AFNetworking.h"
-#import "AFURLRequestSerialization.h"
-
 #import "AFURLConnectionOperation.h"
 #import "AFHTTPRequestOperation.h"
-#import "AFURLRequestSerialization.h"
-
+#import "AFHTTPClient.h"
 
 
 @interface ViewController () <NSXMLParserDelegate>
@@ -29,6 +24,8 @@
     Book *bookObj;
     SQLiteManager *sqldb;
     NSDictionary *xmlDictionary;
+    
+    
 }
 
 
@@ -36,12 +33,11 @@
 
 @end
 
-@implementation ViewController 
+@implementation ViewController
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.results = [[NSMutableArray alloc] init];
     // Do any additional setup after loading the view, typically from a nib.
     
 }
@@ -56,7 +52,7 @@
 //     *****xml read in NSLog*****
 - (IBAction)xmlRead:(id)sender {
 NSError *err;
-NSString *strHomepath = [[NSBundle mainBundle]pathForResource:@"Read" ofType:@"xml"];
+NSString *strHomepath = [[NSBundle mainBundle]pathForResource:@"New" ofType:@"xml"];
 NSString *strXML = [NSString stringWithContentsOfFile:strHomepath encoding:NSUTF8StringEncoding error:&err];
 xmlDictionary = [XMLReader dictionaryForXMLString:strXML error:&err];
 NSLog(@"xml Dictionary :%@",xmlDictionary);
@@ -95,83 +91,55 @@ NSLog(@"xml Dictionary :%@",xmlDictionary);
 
 -(void)parseXml
 {
-   
-  //  NSURL *URL = [[NSURL alloc] initWithString:@"https://192.168.5.172/iosDemo/Books.xml"];
-//    NSString *xmlString = [[NSString alloc] initWithContentsOfURL:URL encoding:NSUTF8StringEncoding error:NULL];
-//    NSLog(@"string: %@", xmlString);
-    
-
-//    NSString *url = [[NSBundle mainBundle]pathForResource:@"Books" ofType:@"xml"];
-//    NSXMLParser *xmlparse=[[NSXMLParser alloc]initWithContentsOfURL:url];
-//    NSLog(@"the parser file is: %@",xmlparse);
-//    [xmlparse setDelegate:self];
-//    [xmlparse setShouldResolveExternalEntities:NO];
-//    [xmlparse parse];
-    
- // frst try
-    /*
-    NSString *string = [NSString stringWithFormat:@"https://192.168.5.172/iosDemo/Books.xml"];
-    NSURL *url = [NSURL URLWithString:string];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    
+ 
+    AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:@"http://demo.tremorvideo.com/proddev/vast/vast_wrapper_linear_1.xml"]];
+        NSMutableURLRequest *request = [httpClient requestWithMethod:@"GET"
+                                                            path:@"http://demo.tremorvideo.com/proddev/vast/vast_wrapper_linear_1.xml"
+                                                      parameters:nil];
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    operation.responseSerializer = [AFXMLParserResponseSerializer serializer];
-    
-    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject)
-    {
-        
-        NSXMLParser *XMLParser = (NSXMLParser *)responseObject;
-        [XMLParser setShouldProcessNamespaces:YES];
-    
-    
-    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error Retrieving Weather"
-                                                            message:[error localizedDescription]
-                                                           delegate:nil
-                                                  cancelButtonTitle:@"Ok"
-                                                  otherButtonTitles:nil];
-        [alertView show];
-        
-    }];
-    
-    [operation start];
-    NSLog(@"the parser file is: %@",request);
-    
-*/
-    NSString *string = [NSString stringWithFormat:@"https://192.168.5.172/iosDemo/Books.xml"];
-    NSURL *url = [NSURL URLWithString:string];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    
-    // 2
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    operation.responseSerializer = [AFJSONResponseSerializer serializer];
-    
+    [httpClient registerHTTPOperationClass:[AFHTTPRequestOperation class]];
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-        // 3
-        self.weather = (NSDictionary *)responseObject;
-        self.title = @"JSON Retrieved";
-        [self.tableView reloadData];
+        // Print the response body in text
+        NSString *strValue = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+        NSError *err;
+        xmlDictionary = [XMLReader dictionaryForXMLString:strValue error:&err];
+        
+        [self DBInsert:[[[[[[[[[xmlDictionary valueForKey:@"VAST"]  valueForKey:@"Ad"] valueForKey:@"Wrapper"] valueForKey:@"Creatives"] valueForKey:@"Creative"] valueForKey:@"Linear"] valueForKey:@"TrackingEvents"] objectAtIndex:0] objectForKey:@"Tracking"]];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
-        // 4
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error Retrieving Weather"
-                                                            message:[error localizedDescription]
-                                                           delegate:nil
-                                                  cancelButtonTitle:@"Ok"
-                                                  otherButtonTitles:nil];
-        [alertView show];
+        NSLog(@"Error: %@", error);
     }];
-    
-    // 5
     [operation start];
+    // Save into correct location
+}
 
-    NSLog(@"the parser file is: %@",request);
+
+-(void)DBInsert:(NSArray *)arrValue{
+        NSLog(@"arr ::%@",arrValue);
+}
+- (IBAction)insertBtn:(id)sender {
+   
+        NSLog(@"Creating editable copy of database");
+        // First, test for existence.
+        BOOL success;
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        NSError *error;
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDirectory = [paths objectAtIndex:0];
+        NSString *writableDBPath = [documentsDirectory stringByAppendingPathComponent:@"Books.sqlite"];
+        success = [fileManager fileExistsAtPath:writableDBPath];
+        if (success) return;
+        // The writable database does not exist, so copy the default to the appropriate location.
+        NSString *defaultDBPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Books.sqlite"];
+        success = [fileManager copyItemAtPath:defaultDBPath toPath:writableDBPath error:&error];
+        if (!success) {
+            NSAssert1(0, @"Failed to create writable database file with message '%@'.", [error localizedDescription]);
+        }
+
     
-    }
-
+    
+}
 
 - (void)parserDidStartDocument:(NSXMLParser *)parser{
     // sent when the parser begins parsing of the document.
@@ -192,51 +160,79 @@ NSLog(@"xml Dictionary :%@",xmlDictionary);
         NSLog(@"------------------------");
     
     
-        if ([elementName isEqualToString:@"root"])
+        if ([elementName isEqualToString:@"VAST"])
         {
             bookObj = [[Book alloc] init];
         }
  
-        if ([elementName isEqualToString:@"book"])
+        if ([elementName isEqualToString:@"event"])
         {
-            NSString *name=[attributeDict objectForKey:@"id"];
+            NSString *name=[attributeDict objectForKey:@"text"];
             NSLog(@" %@", name);
             [bookObj setBookID:name];
         }
-        if ([elementName isEqualToString:@"author"])
+        if ([elementName isEqualToString:@"event"])
         {
-            NSString *name=[attributeDict objectForKey:@"name"];
+            NSString *name=[attributeDict objectForKey:@"text"];
             NSLog(@" %@", name);
             [bookObj setAuthor:name];
         }
-        if ([elementName isEqualToString:@"title"])
+        if ([elementName isEqualToString:@"event"])
         {
-            NSString *name=[attributeDict objectForKey:@"title"];
+            NSString *name=[attributeDict objectForKey:@"text"];
             NSLog(@" %@", name);
             [bookObj setTitle:name];
         }
-        if ([elementName isEqualToString:@"genre"])
+        if ([elementName isEqualToString:@"event"])
         {
-            NSString *name=[attributeDict objectForKey:@"genre"];
+            NSString *name=[attributeDict objectForKey:@"text"];
             NSLog(@" %@", name);
             [bookObj setGenre:name];
         }
-        if ([elementName isEqualToString:@"price"])
+        if ([elementName isEqualToString:@"event"])
         {
-            NSString *name=[attributeDict objectForKey:@"price"];
+            NSString *name=[attributeDict objectForKey:@"text"];
             NSLog(@" %@", name);
             [bookObj setPrice:name];
         }
-        if ([elementName isEqualToString:@"publish_date"])
+        if ([elementName isEqualToString:@"event"])
         {
-            NSString *name=[attributeDict objectForKey:@"publish"];
+            NSString *name=[attributeDict objectForKey:@"text"];
             NSLog(@" %@", name);
             [bookObj setPubDate:name];
         }
         
-        if ([elementName isEqualToString:@"description"])
+        if ([elementName isEqualToString:@"event"])
         {
-            NSString *name=[attributeDict objectForKey:@"desc"];
+            NSString *name=[attributeDict objectForKey:@"text"];
+            NSLog(@" %@", name);
+            [bookObj setBookDesc:name];
+        }
+    
+        if ([elementName isEqualToString:@"event"])
+        {
+            NSString *name=[attributeDict objectForKey:@"text"];
+            NSLog(@" %@", name);
+            [bookObj setBookDesc:name];
+        }
+    
+        if ([elementName isEqualToString:@"event"])
+        {
+            NSString *name=[attributeDict objectForKey:@"text"];
+            NSLog(@" %@", name);
+            [bookObj setBookDesc:name];
+        }
+    
+        if ([elementName isEqualToString:@"event"])
+        {
+            NSString *name=[attributeDict objectForKey:@"text"];
+            NSLog(@" %@", name);
+            [bookObj setBookDesc:name];
+        }
+    
+        if ([elementName isEqualToString:@"event"])
+        {
+            NSString *name=[attributeDict objectForKey:@"text"];
             NSLog(@" %@", name);
             [bookObj setBookDesc:name];
         }
@@ -414,3 +410,66 @@ NSLog(@"xml Dictionary :%@",xmlDictionary);
     }
 }
 @end
+//    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://192.168.5.172/iosDemo/Books.xml"]];
+//    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+//
+//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//    NSString *path = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"filename"];
+//    operation.outputStream = [NSOutputStream outputStreamToFileAtPath:path append:NO];
+//
+//    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        NSLog(@"Successfully downloaded file to %@", path);
+//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        NSLog(@"Error: %@", error);
+//    }];
+//
+//    [operation start];
+
+//
+//        AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:@"http://google.com/"]];
+//    NSMutableURLRequest *request = [httpClient requestWithMethod:@"GET"
+//                                                            path:@"http://google.com/api/pigs/"
+//                                                      parameters:nil];
+//
+//    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+//
+//    [httpClient registerHTTPOperationClass:[AFHTTPRequestOperation class]];
+//
+//    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+//
+//        // Print the response body in text
+//        NSLog(@"Response: %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
+//
+//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        NSLog(@"Error: %@", error);
+//    }];
+//    [operation start];
+/*
+ NSString *string = [NSString stringWithFormat:@"https://192.168.5.172/iosDemo/Books.xml"];
+ NSURL *url = [NSURL URLWithString:string];
+ NSURLRequest *request = [NSURLRequest requestWithURL:url];
+ 
+ AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+ operation.responseSerializer = [AFXMLParserResponseSerializer serializer];
+ 
+ [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject)
+ {
+ 
+ NSXMLParser *XMLParser = (NSXMLParser *)responseObject;
+ [XMLParser setShouldProcessNamespaces:YES];
+ 
+ 
+ }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+ 
+ UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error"
+ message:[error localizedDescription]
+ delegate:nil
+ cancelButtonTitle:@"Ok"
+ otherButtonTitles:nil];
+ [alertView show];
+ 
+ }];
+ 
+ [operation start];
+ NSLog(@"the parser file is: %@",request);
+ */

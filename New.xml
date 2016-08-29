@@ -1,0 +1,87 @@
+VAST =     {
+                "@version" = "2.0";
+                Ad =
+                {
+                "@id" = 602833;
+                Wrapper =
+                {
+                AdSystem = "Acudeo Compatible";
+                Creatives =
+                {
+                Creative =(
+                {
+"@AdID" = 602833;
+                Linear =
+{
+                TrackingEvents =
+{
+                Tracking =(
+{
+                "@event" = creativeView;
+                text = "http://myTrackingURL/wrapper/creativeView";
+                },
+                {
+                "@event" = start;
+                text = "http://myTrackingURL/wrapper/start";
+                },
+                {
+                "@event" = midpoint;
+                text = "http://myTrackingURL/wrapper/midpoint";
+                },
+                {
+                "@event" = firstQuartile;
+                text = "http://myTrackingURL/wrapper/firstQuartile";
+                },
+                {
+                "@event" = thirdQuartile;
+                text = "http://myTrackingURL/wrapper/thirdQuartile";
+                },
+                {
+                "@event" = complete;
+                text = "http://myTrackingURL/wrapper/complete";
+                },
+                {
+                "@event" = mute;
+                text = "http://myTrackingURL/wrapper/mute";
+                },
+                {
+                "@event" = unmute;
+                text = "http://myTrackingURL/wrapper/unmute";
+                },
+                {
+                "@event" = pause;
+                text = "http://myTrackingURL/wrapper/pause";
+                },
+                {
+                "@event" = resume;
+                text = "http://myTrackingURL/wrapper/resume";
+                },
+                {
+                "@event" = fullscreen;
+                text = "http://myTrackingURL/wrapper/fullscreen";
+                }
+                );
+                };
+                };
+                },
+        {
+                Linear =
+            {
+                VideoClicks =
+                {
+                ClickTracking = "http://myTrackingURL/wrapper/click";
+                };
+            };
+        },
+        {
+                "@AdID" = "602833-NonLinearTracking";
+            }
+                    );
+                };
+                Error = "http://myErrorURL/wrapper/error";
+                Impression = "http://myTrackingURL/wrapper/impression";
+                VASTAdTagURI = "http://demo.tremormedia.com/proddev/vast/vast_inline_linear.xml";
+                };
+            };
+        };
+}
