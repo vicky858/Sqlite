@@ -10,10 +10,10 @@
 #import "SQLiteManager.h"
 #import "FMDatabase.h"
 #import "ZipManager.h"
-@interface ViewController : UIViewController<NSXMLParserDelegate>
+@interface ViewController :UIViewController<UITextViewDelegate,UITableViewDataSource,NSXMLParserDelegate>
 
-@property (strong, nonatomic)  FMDatabase *db;
-@property (weak, nonatomic) IBOutlet UIButton *btn;
+@property (strong, nonatomic,nullable)  FMDatabase *db;
+@property (weak, nonatomic,nullable) IBOutlet UIButton *btn;
 @property (nonatomic, strong, null_resettable) UITableView *tableView;
 - (IBAction)btnAction:(id)sender;
 - (IBAction)xmlRead:(id)sender;

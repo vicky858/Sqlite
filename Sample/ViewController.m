@@ -15,7 +15,7 @@
 #import "AFURLConnectionOperation.h"
 #import "AFHTTPRequestOperation.h"
 #import "AFHTTPClient.h"
-
+#import "ZipArchive.h"
 
 @interface ViewController () <NSXMLParserDelegate>
 {
@@ -24,8 +24,8 @@
     Book *bookObj;
     SQLiteManager *sqldb;
     NSDictionary *xmlDictionary;
-    
-    
+    NSString *_databasePath;
+    ZipManager *zipManagerObj;
 }
 
 
@@ -39,8 +39,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    
-}
+    zipManagerObj = [[ZipManager alloc] init];}
 
 - (void)didReceiveMemoryWarning
 {
@@ -93,7 +92,7 @@ NSLog(@"xml Dictionary :%@",xmlDictionary);
 {
  
     AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:@"http://demo.tremorvideo.com/proddev/vast/vast_wrapper_linear_1.xml"]];
-        NSMutableURLRequest *request = [httpClient requestWithMethod:@"GET"
+    NSMutableURLRequest *request = [httpClient requestWithMethod:@"GET"
                                                             path:@"http://demo.tremorvideo.com/proddev/vast/vast_wrapper_linear_1.xml"
                                                       parameters:nil];
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
@@ -106,6 +105,14 @@ NSLog(@"xml Dictionary :%@",xmlDictionary);
         xmlDictionary = [XMLReader dictionaryForXMLString:strValue error:&err];
         
         [self DBInsert:[[[[[[[[[xmlDictionary valueForKey:@"VAST"]  valueForKey:@"Ad"] valueForKey:@"Wrapper"] valueForKey:@"Creatives"] valueForKey:@"Creative"] valueForKey:@"Linear"] valueForKey:@"TrackingEvents"] objectAtIndex:0] objectForKey:@"Tracking"]];
+                NSData *serialzedData=[NSJSONSerialization dataWithJSONObject:xmlDictionary options:0 error:nil];
+        
+        NSString *saveJson = [[NSString alloc] initWithBytes:[serialzedData bytes] length:[serialzedData length] encoding:NSUTF8StringEncoding];
+                [self writeJsonToFile:saveJson];
+                    NSLog(@"Read JSON File : %@",[self readJsonFromFile]);
+        
+        
+
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
@@ -116,162 +123,37 @@ NSLog(@"xml Dictionary :%@",xmlDictionary);
 
 
 -(void)DBInsert:(NSArray *)arrValue{
-        NSLog(@"arr ::%@",arrValue);
-}
-- (IBAction)insertBtn:(id)sender {
-   
-        NSLog(@"Creating editable copy of database");
-        // First, test for existence.
-        BOOL success;
-        NSFileManager *fileManager = [NSFileManager defaultManager];
-        NSError *error;
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        NSString *documentsDirectory = [paths objectAtIndex:0];
-        NSString *writableDBPath = [documentsDirectory stringByAppendingPathComponent:@"Books.sqlite"];
-        success = [fileManager fileExistsAtPath:writableDBPath];
-        if (success) return;
-        // The writable database does not exist, so copy the default to the appropriate location.
-        NSString *defaultDBPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Books.sqlite"];
-        success = [fileManager copyItemAtPath:defaultDBPath toPath:writableDBPath error:&error];
-        if (!success) {
-            NSAssert1(0, @"Failed to create writable database file with message '%@'.", [error localizedDescription]);
-        }
-
+    NSLog(@"arr ::%@",arrValue);
+    [self createDatabaseIfNeeded];
     
-    
-}
-
-- (void)parserDidStartDocument:(NSXMLParser *)parser{
-    // sent when the parser begins parsing of the document.
-    NSLog(@"------------------------");
-    NSLog(@"parser - Start Document");
-    NSLog(@"------------------------");
-    
-    bookArray = nil;
-    bookArray = [[NSMutableArray alloc] init];
-}
-
-
-- (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qualifiedName attributes:(NSDictionary *)attributeDict
-{
-           //in this method does not enter
-        NSLog(@"------------------------");
-        NSLog(@"StartElement : %@",elementName);
-        NSLog(@"------------------------");
-    
-    
-        if ([elementName isEqualToString:@"VAST"])
-        {
-            bookObj = [[Book alloc] init];
-        }
- 
-        if ([elementName isEqualToString:@"event"])
-        {
-            NSString *name=[attributeDict objectForKey:@"text"];
-            NSLog(@" %@", name);
-            [bookObj setBookID:name];
-        }
-        if ([elementName isEqualToString:@"event"])
-        {
-            NSString *name=[attributeDict objectForKey:@"text"];
-            NSLog(@" %@", name);
-            [bookObj setAuthor:name];
-        }
-        if ([elementName isEqualToString:@"event"])
-        {
-            NSString *name=[attributeDict objectForKey:@"text"];
-            NSLog(@" %@", name);
-            [bookObj setTitle:name];
-        }
-        if ([elementName isEqualToString:@"event"])
-        {
-            NSString *name=[attributeDict objectForKey:@"text"];
-            NSLog(@" %@", name);
-            [bookObj setGenre:name];
-        }
-        if ([elementName isEqualToString:@"event"])
-        {
-            NSString *name=[attributeDict objectForKey:@"text"];
-            NSLog(@" %@", name);
-            [bookObj setPrice:name];
-        }
-        if ([elementName isEqualToString:@"event"])
-        {
-            NSString *name=[attributeDict objectForKey:@"text"];
-            NSLog(@" %@", name);
-            [bookObj setPubDate:name];
-        }
-        
-        if ([elementName isEqualToString:@"event"])
-        {
-            NSString *name=[attributeDict objectForKey:@"text"];
-            NSLog(@" %@", name);
-            [bookObj setBookDesc:name];
-        }
-    
-        if ([elementName isEqualToString:@"event"])
-        {
-            NSString *name=[attributeDict objectForKey:@"text"];
-            NSLog(@" %@", name);
-            [bookObj setBookDesc:name];
-        }
-    
-        if ([elementName isEqualToString:@"event"])
-        {
-            NSString *name=[attributeDict objectForKey:@"text"];
-            NSLog(@" %@", name);
-            [bookObj setBookDesc:name];
-        }
-    
-        if ([elementName isEqualToString:@"event"])
-        {
-            NSString *name=[attributeDict objectForKey:@"text"];
-            NSLog(@" %@", name);
-            [bookObj setBookDesc:name];
-        }
-    
-        if ([elementName isEqualToString:@"event"])
-        {
-            NSString *name=[attributeDict objectForKey:@"text"];
-            NSLog(@" %@", name);
-            [bookObj setBookDesc:name];
-        }
-
-}
-
-- (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(nullable NSString *)namespaceURI qualifiedName:(nullable NSString *)qName{
-    
-    NSLog(@"************************");
-    NSLog(@"End Element : %@",elementName);
-    NSLog(@"************************");
-    
-    if ([elementName isEqualToString:@"root"])
-    {
-        [bookArray addObject:bookObj];
-        bookObj = nil;
+    if([_db open]){
+        [_db executeUpdate:@"create table if not exists Events(eventName text, eventURL text)"];
+        [_db close];
     }
-}
-
-- (void)parserDidEndDocument:(NSXMLParser *)parser{
-// sent when the parser has completed parsing. If this is encountered, the parse was successful.
-    NSLog(@"------------------------");
-    NSLog(@"parser - End Document");
-    NSLog(@"------------------------");
     
-    NSLog(@"Book List : %@",bookArray);
-    [self saveBooks];
+    BOOL updaetStatus = NO;
+    BOOL insertStatus = NO;
+    for (NSDictionary *dic in arrValue) {
+        if([self findEvent:dic]){
+            updaetStatus = [self updateEvent:dic];
+            NSLog(@"updaet Status : %d",updaetStatus);
+        }else{
+            insertStatus = [self insertEvent:dic];
+            NSLog(@"insert Status : %d",insertStatus);
+        }
+    }
+    
+    
+    
+    
 }
 
-- (IBAction)btnAction:(id)sender {
-    [self parseXml];
-}
 
-
--(BOOL)findBook:(Book*)obj{
+-(BOOL)findEvent:(NSDictionary*)obj{
     
     [_db open];
-    FMResultSet *results = [_db executeQuery:@"SELECT * FROM Books where id= ?;",obj.bookID];
-
+    FMResultSet *results = [_db executeQuery:@"SELECT * FROM Events where eventName= ?;",[obj objectForKey:@"@event"]];
+    
     if([results next]) {
         [_db close];
         return YES;
@@ -280,82 +162,268 @@ NSLog(@"xml Dictionary :%@",xmlDictionary);
     return NO;
 }
 
--(BOOL)updateBook:(Book*)obj{
+-(BOOL)updateEvent:(NSDictionary*)obj{
     
     [_db open];
-    return [_db executeUpdate:@"UPDATE Books set id= ?, author=?, title=?, genre=?, price=?, publish_date=?, description=? where id= ?;", obj.bookID, obj.author, obj.title, obj.genre, obj.price, obj.pubDate, obj.bookDesc, obj.bookID];
+    return [_db executeUpdate:@"UPDATE Events set eventName= ?, eventURL=? where eventName= ?;", [obj objectForKey:@"@event"], [obj objectForKey:@"text"], [obj objectForKey:@"@event"]];
 }
 
--(BOOL)insertBook:(Book*)obj{
-   [_db open];
-    return [_db executeUpdate:@"INSERT INTO Books (id, author, title, genre, price, publish_date, description) VALUES (?,?,?,?,?,?,?);", obj.bookID, obj.author, obj.title, obj.genre, obj.price, obj.pubDate, obj.bookDesc];
-}
-
--(BOOL)deleteBook:(Book*)obj{
+-(BOOL)insertEvent:(NSDictionary*)obj{
     [_db open];
-    return [_db executeUpdate:@"DELETE FROM Books WHERE id = ?", obj.bookID];
+    return [_db executeUpdate:@"INSERT INTO Events (eventName, eventURL) VALUES (?,?);", [obj objectForKey:@"@event"], [obj objectForKey:@"text"]];
 }
 
--(void)saveBooks{
-    
-    NSLog(@"------------------------");
-    NSLog(@"SQLite DB Insert / Update");
-    NSLog(@"------------------------");
 
-    
-    [self createDatabaseIfNeeded];
-    
-    BOOL updaetStatus = NO;
-    BOOL insertStatus = NO;
-    for (Book *obj in bookArray) {
-        if([self findBook:obj]){
-            updaetStatus = [self updateBook:obj];
-            NSLog(@"updaetStatus : %d",updaetStatus);
-        }else{
-            insertStatus = [self insertBook:obj];
-            NSLog(@"insertStatus : %d",insertStatus);
-        }
-    }
 
-    
-    NSLog(@"**************************************");
-    NSLog(@"**************************************");
-    NSLog(@"        SQLite DB Get Books           ");
-    NSLog(@"**************************************");
-    NSLog(@"**************************************");
-    
-    FMResultSet *results = [_db executeQuery:@"SELECT * FROM Books"];
-    NSMutableArray *savedBooks = [[NSMutableArray alloc] init];
-    while([results next]) {
-        Book *obj	= [[Book alloc] init];
-        obj.bookID = [results stringForColumn:@"id"];
-        obj.author = [results stringForColumn:@"author"];
-        obj.title = [results stringForColumn:@"title"];
-        obj.genre = [results stringForColumn:@"genre"];
-        obj.price = [results stringForColumn:@"price"];
-        obj.pubDate = [results stringForColumn:@"publish_date"];
-        obj.bookDesc = [results stringForColumn:@"description"];
-        [savedBooks addObject:obj];
-        NSLog(@"BOOK ID : %@, Book Title : %@",obj.bookID, obj.title);
-    }
-    
-    NSLog(@"No.of Books Count : %lu",(unsigned long)[savedBooks count]);
-    [_db close];
-    
-    /*
-    NSLog(@"**************************************");
-    NSLog(@"**************************************");
-    NSLog(@"SQLite DB Delete Books");
-    NSLog(@"**************************************");
-    NSLog(@"**************************************");
-    
-    for (Book *obj in bookArray) {
-            BOOL deleteStatus = [self deleteBook:obj];
-            NSLog(@"deleteStatus : %d",deleteStatus);
-    }
-    [_db close];
-     */
+- (IBAction)btnAction:(id)sender {
+    [self parseXml];
 }
+
+- (void)writeJsonToFile:(NSString*)aString {
+    
+    // Build the path, and create if needed.
+    NSString* filePath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString* fileName = @"events.json";
+    
+    NSString* fileAtPath = [filePath stringByAppendingPathComponent:fileName];
+   
+    
+
+    if (![[NSFileManager defaultManager] fileExistsAtPath:fileAtPath]) {
+        [[NSFileManager defaultManager] createFileAtPath:fileAtPath contents:nil attributes:nil];
+    }
+    
+    // The main act...
+    [[aString dataUsingEncoding:NSUTF8StringEncoding] writeToFile:fileAtPath atomically:NO];
+}
+
+- (NSString*)readJsonFromFile {
+    
+    // Build the path...
+    NSString* filePath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString* fileName = @"events.json";
+    
+       NSString* fileAtPath = [filePath stringByAppendingPathComponent:fileName];
+    
+    // The main act...
+    return [[NSString alloc] initWithData:[NSData dataWithContentsOfFile:fileAtPath] encoding:NSUTF8StringEncoding];
+}
+
+//- (void)parserDidStartDocument:(NSXMLParser *)parser{
+//    // sent when the parser begins parsing of the document.
+//    NSLog(@"------------------------");
+//    NSLog(@"parser - Start Document");
+//    NSLog(@"------------------------");
+//    
+//    bookArray = nil;
+//    bookArray = [[NSMutableArray alloc] init];
+//}
+//
+//
+//- (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qualifiedName attributes:(NSDictionary *)attributeDict
+//{
+//           //in this method does not enter
+//        NSLog(@"------------------------");
+//        NSLog(@"StartElement : %@",elementName);
+//        NSLog(@"------------------------");
+//    
+//    
+//        if ([elementName isEqualToString:@"VAST"])
+//        {
+//            bookObj = [[Book alloc] init];
+//        }
+// 
+//        if ([elementName isEqualToString:@"event"])
+//        {
+//            NSString *name=[attributeDict objectForKey:@"creativeView"];
+//            NSLog(@" %@", name);
+//            [bookObj setBookID:name];
+//        }
+//        if ([elementName isEqualToString:@"event"])
+//        {
+//            NSString *name=[attributeDict objectForKey:@"unmute"];
+//            NSLog(@" %@", name);
+//            [bookObj setAuthor:name];
+//        }
+//        if ([elementName isEqualToString:@"event"])
+//        {
+//            NSString *name=[attributeDict objectForKey:@"pause"];
+//            NSLog(@" %@", name);
+//            [bookObj setTitle:name];
+//        }
+//        if ([elementName isEqualToString:@"event"])
+//        {
+//            NSString *name=[attributeDict objectForKey:@"text"];
+//            NSLog(@" %@", name);
+//            [bookObj setGenre:name];
+//        }
+//        if ([elementName isEqualToString:@"event"])
+//        {
+//            NSString *name=[attributeDict objectForKey:@"text"];
+//            NSLog(@" %@", name);
+//            [bookObj setPrice:name];
+//        }
+//        if ([elementName isEqualToString:@"event"])
+//        {
+//            NSString *name=[attributeDict objectForKey:@"text"];
+//            NSLog(@" %@", name);
+//            [bookObj setPubDate:name];
+//        }
+//        
+//        if ([elementName isEqualToString:@"event"])
+//        {
+//            NSString *name=[attributeDict objectForKey:@"text"];
+//            NSLog(@" %@", name);
+//            [bookObj setBookDesc:name];
+//        }
+//    
+//        if ([elementName isEqualToString:@"event"])
+//        {
+//            NSString *name=[attributeDict objectForKey:@"text"];
+//            NSLog(@" %@", name);
+//            [bookObj setBookDesc:name];
+//        }
+//    
+//        if ([elementName isEqualToString:@"event"])
+//        {
+//            NSString *name=[attributeDict objectForKey:@"text"];
+//            NSLog(@" %@", name);
+//            [bookObj setBookDesc:name];
+//        }
+//    
+//        if ([elementName isEqualToString:@"event"])
+//        {
+//            NSString *name=[attributeDict objectForKey:@"text"];
+//            NSLog(@" %@", name);
+//            [bookObj setBookDesc:name];
+//        }
+//    
+//        if ([elementName isEqualToString:@"event"])
+//        {
+//            NSString *name=[attributeDict objectForKey:@"text"];
+//            NSLog(@" %@", name);
+//            [bookObj setBookDesc:name];
+//        }
+//
+//}
+//
+//- (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(nullable NSString *)namespaceURI qualifiedName:(nullable NSString *)qName{
+//    
+//    NSLog(@"************************");
+//    NSLog(@"End Element : %@",elementName);
+//    NSLog(@"************************");
+//    
+//    if ([elementName isEqualToString:@"root"])
+//    {
+//        [bookArray addObject:bookObj];
+//        bookObj = nil;
+//    }
+//}
+//
+//- (void)parserDidEndDocument:(NSXMLParser *)parser{
+//// sent when the parser has completed parsing. If this is encountered, the parse was successful.
+//    NSLog(@"------------------------");
+//    NSLog(@"parser - End Document");
+//    NSLog(@"------------------------");
+//    
+//    NSLog(@"Book List : %@",bookArray);
+//    [self saveBooks];
+//}
+//
+//- (IBAction)btnAction:(id)sender {
+//    [self parseXml];
+//}
+//
+//
+//-(BOOL)findBook:(Book*)obj{
+//    
+//    [_db open];
+//    FMResultSet *results = [_db executeQuery:@"SELECT * FROM Books where id= ?;",obj.bookID];
+//
+//    if([results next]) {
+//        [_db close];
+//        return YES;
+//    }
+//    [_db close];
+//    return NO;
+//}
+//
+//-(BOOL)updateBook:(Book*)obj{
+//    
+//    [_db open];
+//    return [_db executeUpdate:@"UPDATE Books set id= ?, author=?, title=?, genre=?, price=?, publish_date=?, description=? where id= ?;", obj.bookID, obj.author, obj.title, obj.genre, obj.price, obj.pubDate, obj.bookDesc, obj.bookID];
+//}
+//
+//-(BOOL)insertBook:(Book*)obj{
+//   [_db open];
+//    return [_db executeUpdate:@"INSERT INTO Books (id, author, title, genre, price, publish_date, description) VALUES (?,?,?,?,?,?,?);", obj.bookID, obj.author, obj.title, obj.genre, obj.price, obj.pubDate, obj.bookDesc];
+//}
+//
+//-(BOOL)deleteBook:(Book*)obj{
+//    [_db open];
+//    return [_db executeUpdate:@"DELETE FROM Books WHERE id = ?", obj.bookID];
+//}
+//
+//-(void)saveBooks{
+//    
+//    NSLog(@"------------------------");
+//    NSLog(@"SQLite DB Insert / Update");
+//    NSLog(@"------------------------");
+//
+//    
+//    [self createDatabaseIfNeeded];
+//    
+//    BOOL updaetStatus = NO;
+//    BOOL insertStatus = NO;
+//    for (Book *obj in bookArray) {
+//        if([self findBook:obj]){
+//            updaetStatus = [self updateBook:obj];
+//            NSLog(@"updaetStatus : %d",updaetStatus);
+//        }else{
+//            insertStatus = [self insertBook:obj];
+//            NSLog(@"insertStatus : %d",insertStatus);
+//        }
+//    }
+//
+//    
+//    NSLog(@"**************************************");
+//    NSLog(@"**************************************");
+//    NSLog(@"        SQLite DB Get Books           ");
+//    NSLog(@"**************************************");
+//    NSLog(@"**************************************");
+//    
+//    FMResultSet *results = [_db executeQuery:@"SELECT * FROM Books"];
+//    NSMutableArray *savedBooks = [[NSMutableArray alloc] init];
+//    while([results next]) {
+//        Book *obj	= [[Book alloc] init];
+//        obj.bookID = [results stringForColumn:@"id"];
+//        obj.author = [results stringForColumn:@"author"];
+//        obj.title = [results stringForColumn:@"title"];
+//        obj.genre = [results stringForColumn:@"genre"];
+//        obj.price = [results stringForColumn:@"price"];
+//        obj.pubDate = [results stringForColumn:@"publish_date"];
+//        obj.bookDesc = [results stringForColumn:@"description"];
+//        [savedBooks addObject:obj];
+//        NSLog(@"BOOK ID : %@, Book Title : %@",obj.bookID, obj.title);
+//    }
+//    
+//    NSLog(@"No.of Books Count : %lu",(unsigned long)[savedBooks count]);
+//    [_db close];
+//    
+//    /*
+//    NSLog(@"**************************************");
+//    NSLog(@"**************************************");
+//    NSLog(@"SQLite DB Delete Books");
+//    NSLog(@"**************************************");
+//    NSLog(@"**************************************");
+//    
+//    for (Book *obj in bookArray) {
+//            BOOL deleteStatus = [self deleteBook:obj];
+//            NSLog(@"deleteStatus : %d",deleteStatus);
+//    }
+//    [_db close];
+//     */
+//}
 
 -(void)createDatabaseIfNeeded{
     
