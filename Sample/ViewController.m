@@ -51,7 +51,7 @@
 //     *****xml read in NSLog*****
 - (IBAction)xmlRead:(id)sender {
 NSError *err;
-NSString *strHomepath = [[NSBundle mainBundle]pathForResource:@"New" ofType:@"xml"];
+NSString *strHomepath = [[NSBundle mainBundle]pathForResource:@"Books" ofType:@"xml"];
 NSString *strXML = [NSString stringWithContentsOfFile:strHomepath encoding:NSUTF8StringEncoding error:&err];
 xmlDictionary = [XMLReader dictionaryForXMLString:strXML error:&err];
 NSLog(@"xml Dictionary :%@",xmlDictionary);
